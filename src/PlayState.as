@@ -29,9 +29,9 @@ package
 			add(player);
 			
 			victims = new FlxGroup
-			for (var j:int = 0; j < 5; j++) 
+			for (var j:int = 0; j < 200; j++) 
 			{
-				victims.add(new Victim(j * 6 + 50, j * 6 + 100));
+				victims.add(new Victim(Math.random() * 400, 100 + Math.random() * 100));
 			}
 			add(victims);
 			FlxG.camera.follow(player, FlxCamera.STYLE_TOPDOWN_TIGHT);
