@@ -17,6 +17,7 @@
   <classpaths>
     <class path="src" />
     <class path="AdamAtomic-flixel-8989e50" />
+    <class path="..\..\..\Dropbox\Dev\Flash\flixel" />
   </classpaths>
   <!-- Build options -->
   <build>
