@@ -14,7 +14,7 @@ package
 	  * 2: wall (2)
 	  * 3: floor
 	  */
-	public class Room 
+	public class Room extends FlxBasic
 	{
 		[Embed(source = "../data/tile1.png")] public static var tileImage:Class;
 		private var roomArray:Array;	// Array med tiles för golv och väggar

@@ -34,11 +34,13 @@ package
 				victims.add(new Victim(j * 6 + 50, j * 6 + 100));
 			}
 			add(victims);
+			FlxG.camera.follow(player, FlxCamera.STYLE_TOPDOWN_TIGHT);
+			FlxG.worldBounds = new FlxRect(0, 0, level.width, level.height);
 		}
 			
 		override public function update():void
 		{
-			
+
 			/*if (player.getSpookState() == true)
 			{
 				
