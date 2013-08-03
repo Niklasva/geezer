@@ -9,12 +9,8 @@ package
 	public class PlayState extends FlxState
 	{
 		public var level:FlxTilemap;
-		public var levelArray:Array;
 		private var levelSize:int;
 		public var player:FlxSprite;
-		
-		
-		
 		public var victims:FlxGroup;
 		
 		
@@ -24,35 +20,19 @@ package
 		{
 			FlxG.bgColor = 0xffffffff;
 			
-			levelSize = 40 * 40;
-			levelArray = new Array(levelSize);
 			
-			
-			for (var i:int = 0; i < levelSize; i++) 
-			{
-				if (Math.random() <= 0.5)
-				{
-					levelArray[i] = Math.round(Math.random());
-				}
-				else
-				{
-					levelArray[i] = 0;
-				}
-			}
-			
-			level = new FlxTilemap();
-			level.loadMap(FlxTilemap.arrayToCSV(levelArray,40), FlxTilemap.ImgAuto, 0, 0, FlxTilemap.AUTO);
+			var room:Room = new Room("Test", 100,40);
+			level = room.tilemap;
 			add(level);
 			
-			player = new Player(FlxG.width / 2 - 5, 0);
+			player = new Player(100,100);
 			add(player);
 			
 			victims = new FlxGroup
 			for (var j:int = 0; j < 5; j++) 
 			{
-				victims.add(new Victim(j * 6, j * 6));
+				victims.add(new Victim(j * 6 + 50, j * 6 + 100));
 			}
-			
 			add(victims);
 		}
 			
@@ -65,6 +45,7 @@ package
 			}*/
 			
 			FlxG.collide(level, player);
+			FlxG.collide(player, victims);
 			super.update();
 		}
 		
