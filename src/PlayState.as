@@ -13,9 +13,6 @@ package
 		public var player:FlxSprite;
 		public var victims:FlxGroup;
 		
-		
-		
-		
 		override public function create():void
 		{
 			FlxG.bgColor = 0xffffffff;
@@ -29,7 +26,7 @@ package
 			add(player);
 			
 			victims = new FlxGroup
-			for (var j:int = 0; j < 200; j++) 
+			for (var j:int = 0; j < 50; j++) 
 			{
 				victims.add(new Victim(Math.random() * 400, 100 + Math.random() * 100));
 			}
@@ -40,7 +37,8 @@ package
 			
 		override public function update():void
 		{
-
+				
+			victims.sort("yPos");
 			/*if (player.getSpookState() == true)
 			{
 				

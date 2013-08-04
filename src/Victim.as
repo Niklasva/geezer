@@ -17,7 +17,7 @@ package
 		private var counter:Number = 0;
 		private var state:String = "Idle";
 		private var direction:Number = 0;
-		
+		public var yPos:int = 0;
 		
 		private var body:FlxSprite;
 		private var head:FlxSprite;
@@ -27,19 +27,24 @@ package
 			position = new Point(X, Y);
 			head = new FlxSprite(position.x - 9, position.y - 26);
 			body = new FlxSprite(position.x, position.y);
-			
 			body.loadGraphic(victimSprites, false, true, 14, 11);
 			body.addAnimation("Walk", [1, 2], 10, true);
 			body.addAnimation("Idle", [0], 10, true);
-			
 			head.loadGraphic(headSprites, false, true, 22, 27);
-			FlxG.state.add(body);
-			FlxG.state.add(head);
+			head.allowCollisions = FlxObject.NONE;
+			add(head);
+			add(body);
 		}
 		
 		override public function update():void 
 		{
+			
+			position.x = body.x;
+			position.y = body.y;
+			yPos = position.y;
 			counter += FlxG.elapsed;
+			head.x = body.x - 9;
+			head.y = body.y - 26;
 			head.velocity = velocity;
 			body.velocity = velocity;
 			if (counter >= Math.random()* 5)
@@ -93,7 +98,9 @@ package
 				body.facing = FlxObject.RIGHT;
 				head.offset.x = 0;
 			}
+			super.update();
 		}
+
 	}
 
 }
