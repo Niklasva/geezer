@@ -10,8 +10,8 @@ package
 	{
 		public var level:FlxTilemap;
 		private var levelSize:int;
-		public var player:FlxSprite;
-		public var victims:FlxGroup;
+		public var player:Player;
+		public var enemies:FlxGroup;
 		
 		override public function create():void
 		{
@@ -25,27 +25,26 @@ package
 			player = new Player(100,100);
 			add(player);
 			
-			victims = new FlxGroup
-			for (var j:int = 0; j < 50; j++) 
+			enemies = new FlxGroup
+			for (var j:int = 0; j < 1; j++) 
 			{
-				victims.add(new Victim(Math.random() * 400, 100 + Math.random() * 100));
+				enemies.add(new Enemy(Math.random() * 400, 100 + Math.random() * 100, player));
 			}
-			add(victims);
+			add(enemies);
 			FlxG.camera.follow(player, FlxCamera.STYLE_TOPDOWN_TIGHT);
 			FlxG.worldBounds = new FlxRect(0, 0, level.width, level.height);
 		}
 			
 		override public function update():void
-		{
-				
-			victims.sort("yPos");
+		{	
+			enemies.sort("yPos");
 			/*if (player.getSpookState() == true)
 			{
 				
 			}*/
 			
 			FlxG.collide(level, player);
-			FlxG.collide(player, victims);
+			FlxG.collide(player, enemies);
 			super.update();
 		}
 		
