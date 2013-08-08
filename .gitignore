@@ -6,7 +6,8 @@ AdamAtomic-flixel-8989e50/
 
 # Other files and folders
 .settings/
-.xml
+GeezerConfig.xml
+GeezerConfig.old
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.

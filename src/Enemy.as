@@ -10,7 +10,7 @@ package
 		[Embed(source="../data/headSprites.png")]
 		public var headSprites:Class;
 		private static var _walkSpeed:int = 25;
-		private static var _runSpeed:int = 90;
+		private static var _runSpeed:int = 80;
 		
 		private var spooked:Boolean;
 		private var isAlive:Boolean = true;
@@ -52,31 +52,58 @@ package
 			counter += FlxG.elapsed;
 			head.x = body.x - 9;
 			head.y = body.y - 26;
-			head.velocity = velocity;
-			body.velocity = velocity;
+			velocity = head.velocity;
+			
+			
+			if (velocity.x > 0)
+			{
+				head.facing = FlxObject.LEFT;
+				body.facing = FlxObject.LEFT;
+				head.offset.x = -10;
+			}
+			else if (velocity.x < 0)
+			{
+				head.facing = FlxObject.RIGHT;
+				body.facing = FlxObject.RIGHT;
+				head.offset.x = 0;
+			}
 			
 			if (nearPlayer())
 			{
+				head.maxVelocity.x = _runSpeed;
+				body.maxVelocity.x = _runSpeed;
+				head.maxVelocity.y = _runSpeed;
+				body.maxVelocity.y = _runSpeed;
+				//velocity.x = 0;
+				//velocity.y = 0;
 				body.play("Walk");
 				if (playerPos.x < position.x)
 				{
 					//go left
-					velocity.x = -_runSpeed;
+					//velocity.x = -_runSpeed;
+					head.acceleration.x = -_runSpeed*4;
+					body.acceleration.x = -_runSpeed*4;
 				}
 				if (playerPos.x > position.x)
 				{
 					//go right
-					velocity.x = _runSpeed;
+					//velocity.x = _runSpeed;
+					head.acceleration.x = _runSpeed*4;
+					body.acceleration.x = _runSpeed*4;
 				}
 				if (playerPos.y < position.y)
 				{
 					//go down
-					velocity.y = -_runSpeed;
+					//velocity.y = -_runSpeed;
+					head.acceleration.y = -_runSpeed*4;
+					body.acceleration.y = -_runSpeed*4;
 				}
 				if (playerPos.y > position.y)
 				{
 					//go up
-					velocity.y = _runSpeed;
+					//velocity.y = _runSpeed;
+					head.acceleration.y = _runSpeed*4;
+					body.acceleration.y = _runSpeed*4;
 				}
 				
 				state = "Run";
@@ -84,6 +111,18 @@ package
 			
 			else
 			{
+				
+				head.maxVelocity.x = _walkSpeed;
+				body.maxVelocity.x = _walkSpeed;
+				head.maxVelocity.y = _walkSpeed;
+				body.maxVelocity.y = _walkSpeed;
+				
+				
+				head.acceleration.x = 0;
+				head.acceleration.y = 0;
+				body.acceleration.x = 0;
+				body.acceleration.x = 0;
+				
 				if (counter >= Math.random() * 5)
 				{
 					if (Math.random() < 0.1)
@@ -103,40 +142,40 @@ package
 				body.play("Walk");
 				if (0.20 < direction < 0.6)
 				{
-					velocity.x = _walkSpeed;
+					head.velocity.x = _walkSpeed;
+					body.velocity.x = _walkSpeed;
 				}
 				else if (direction < 0.30)
 				{
-					velocity.x = -_walkSpeed;
+					head.velocity.x = -_walkSpeed;
+					body.velocity.x = -_walkSpeed;
 				}
 				else if (0.5 < direction < 0.75)
 				{
-					velocity.y = -_walkSpeed;
+					head.velocity.y = -_walkSpeed;
+					body.velocity.y = -_walkSpeed;
 				}
 				else
 				{
-					velocity.y = _walkSpeed;
+					head.velocity.y = _walkSpeed;
+					body.velocity.y = _walkSpeed;
 				}
 			}
 			else if (state == "Idle")
 			{
+				head.acceleration.x = 0;
+				head.acceleration.y = 0;
+				body.acceleration.x = 0;
+				body.acceleration.y = 0;
 				body.play("Idle");
-				velocity.x = 0;
-				velocity.y = 0;
+				velocity = new FlxPoint(0, 0);
+				head.velocity.x = 0;
+				head.velocity.y = 0;
+				body.velocity.x = 0;
+				body.velocity.y = 0;
+
 			}
 			
-			if (velocity.x > 0)
-			{
-				head.facing = FlxObject.LEFT;
-				body.facing = FlxObject.LEFT;
-				head.offset.x = -10;
-			}
-			else if (velocity.x < 0)
-			{
-				head.facing = FlxObject.RIGHT;
-				body.facing = FlxObject.RIGHT;
-				head.offset.x = 0;
-			}
 			super.update();
 		}
 		

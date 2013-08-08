@@ -26,7 +26,7 @@ package
 			add(player);
 			
 			enemies = new FlxGroup
-			for (var j:int = 0; j < 1; j++) 
+			for (var j:int = 0; j < 4; j++) 
 			{
 				enemies.add(new Enemy(Math.random() * 400, 100 + Math.random() * 100, player));
 			}
@@ -45,6 +45,7 @@ package
 			
 			FlxG.collide(level, player);
 			FlxG.collide(player, enemies);
+			FlxG.collide(enemies, enemies);
 			super.update();
 		}
 		
