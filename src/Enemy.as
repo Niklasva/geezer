@@ -168,7 +168,6 @@ package
 				body.acceleration.x = 0;
 				body.acceleration.y = 0;
 				body.play("Idle");
-				velocity = new FlxPoint(0, 0);
 				head.velocity.x = 0;
 				head.velocity.y = 0;
 				body.velocity.x = 0;
