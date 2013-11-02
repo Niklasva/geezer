@@ -17,7 +17,6 @@ package
 		{
 			FlxG.bgColor = 0xffffffff;
 			
-			
 			var room:Room = new Room("Test", 100,40);
 			level = room.tilemap;
 			add(level);
@@ -26,7 +25,7 @@ package
 			add(player);
 			
 			enemies = new FlxGroup
-			for (var j:int = 0; j < 1; j++) 
+			for (var j:int = 0; j < 100; j++) 
 			{
 				enemies.add(new Enemy(Math.random() * 400, 100 + Math.random() * 100, player));
 			}
